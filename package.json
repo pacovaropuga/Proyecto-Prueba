@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "ngx-spinner": "^17.0.0"
+  }
+}
