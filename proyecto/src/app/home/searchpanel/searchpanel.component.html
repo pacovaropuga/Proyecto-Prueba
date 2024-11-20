@@ -1,17 +1,35 @@
 <section>
-
-    <input type="text" placeholder="Search..." aria-label="Number" matInput [formControl]="autocompleteTermino"
-           [matAutocomplete]="auto">
-    <button  (click)="seleccionarTermino(autocompleteTermino.value)">
-        <mat-icon svgIcon="search"></mat-icon>
-    </button>
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="seleccionarTermino($event.option.value)">
-      <mat-option *ngFor="let word of words$ | async" [value]="word">
-          <img width="20px" src="{{ word.language == 'en'? 'https://lexis.ugr.es/artwork/britishflag.png' : 'https://lexis.ugr.es/artwork/es.png'}}" alt="">
-       {{word.term}}
+    <mat-form-field appearance="outline" class="search-bar">
+      <mat-label>Search</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="autocompleteTermino"
+        [matAutocomplete]="auto"
+        placeholder="Search..."
+        aria-label="Search"
+      />
+      <button mat-icon-button (click)="autocompleteTermino.value && seleccionarTermino(autocompleteTermino.value)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="displayFn"
+      (optionSelected)="seleccionarTermino($event.option.value)"
+    >
+      <mat-option
+        *ngFor="let word of words$ | async"
+        [value]="word"
+      >
+        <img
+          width="20px"
+          [src]="word.language === 'en' ? 'https://lexis.ugr.es/artwork/britishflag.png' : 'https://lexis.ugr.es/artwork/es.png'"
+          alt=""
+        />
+        {{ word.term }}
       </mat-option>
     </mat-autocomplete>
-
-
-</section>
-
+  </section>
+  

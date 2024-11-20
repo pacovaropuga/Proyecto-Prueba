@@ -3,11 +3,11 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {SnackBar} from 'bootstrap';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {JwtHelperService} from '@auth0/angular-jwt';
 
-import {environment} from '../environments/environment';
+import {environment} from '../../enviroments/enviroment';
 import {Token} from './token.model';
 import {Error} from './error.model';
 
@@ -33,7 +33,7 @@ export class HttpService {
 //Recibe como parametros un objeto de tipo HttpClient, un objeto de tipo SnackBar y un objeto de tipo Router
 //Este constructor se encarga de inicializar las variables de la clase
 //
-  constructor(private http: HttpClient, private snackBar: SnackBar, private router: Router) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
      this.resetOptions();
   }
 
