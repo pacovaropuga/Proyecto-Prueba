@@ -9,9 +9,10 @@
         placeholder="Search..."
         aria-label="Search"
       />
-      <button mat-icon-button (click)="autocompleteTermino.value && seleccionarTermino(autocompleteTermino.value)">
+      <button mat-icon-button (click)="autocompleteTermino.value && seleccionarTermino({ term: autocompleteTermino.value, idTerm: 0, language: 'en' })">
         <mat-icon>search</mat-icon>
       </button>
+      
     </mat-form-field>
   
     <mat-autocomplete

@@ -91,7 +91,7 @@ word: any;
   seleccionarTermino(option: Word) {
     console.log('Selected:', option);
     this.searchService.entryLanguage = option.language;
-    this.searchService.getEntries(option.idTerm, option.term).subscribe({
+    this.searchService.getEntries(option.idTerm).subscribe({
       next: (entries) => {
         this.searchService.entries$.next(entries);
       },

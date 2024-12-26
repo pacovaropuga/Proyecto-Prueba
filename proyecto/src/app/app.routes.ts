@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './shared/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { RoleGuard } from './role.guard';
+import { RoleGuard } from './shared/login/guards/role.guard';
 
 export const routes: Routes = [
     

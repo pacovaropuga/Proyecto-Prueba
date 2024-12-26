@@ -1,30 +1,40 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, Inject } from '@angular/core';
+import { Router, RouterOutlet, RouterModule } from '@angular/router';
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginComponent } from "./shared/login/login.component";
 import { HomeComponent } from "./home/home.component";
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { provideRouter } from '@angular/router';
-import {routes} from './app.routes';
-import { Routes } from '@angular/router';
+import { routes } from './app.routes';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, DashboardComponent, LoginComponent, HomeComponent],
+  imports: [
+    CommonModule, 
+    RouterModule,
+    RouterOutlet,
+    DashboardComponent,
+    LoginComponent,
+    HomeComponent,
+    NgxSpinnerModule,
+    
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'proyecto';
   static URL = 'app';
 
-  constructor(@Inject(Authservice) public conexion: Authervice, provideRouter(routes) ) {
-    
-}
+  constructor(
+    @Inject('AuthService') public conexion: any,
+    private router: Router
+  ) {}
 
   logout() {
-    this.conexion.cerrarSesión();
+    this.conexion.cerrarSesion();
     this.router.navigate(['/home']);
   }
-
 }

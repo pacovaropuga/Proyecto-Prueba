@@ -1,17 +1,16 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Observable, throwError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
-import {JwtHelperService} from '@auth0/angular-jwt';
+import { environment } from '../../enviroments/enviroment';
+import { Token } from './token.model';
+import { Error } from './error.model';
 
-import {environment} from '../../enviroments/enviroment';
-import {Token} from './token.model';
-import {Error} from './error.model';
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 /**
  * This service handles HTTP requests and responses.
  * It provides methods for login, logout, and various HTTP operations (GET, POST, PUT, PATCH, DELETE).
@@ -22,63 +21,41 @@ export class HttpService {
   static UNAUTHORIZED = 401;
   static NOT_FOUND = 404;
 
-  private token: Token;
-  private headers: HttpHeaders;
-  private params: HttpParams;
-  private responseType: string;
-  private successfulNotification = undefined;
-  private printDirectly: boolean;
+  private token: Token | undefined;
+  private headers: HttpHeaders = new HttpHeaders(); // Ensure initialization
+  private params: HttpParams = new HttpParams(); // Ensure initialization
+  private responseType: 'json' | 'blob' = 'json'; // Ensure initialization
+  private successfulNotification: string | undefined = undefined;
+  private printDirectly: boolean = false;
 
-//Este es el constructor de la clase HttpService
-//Recibe como parametros un objeto de tipo HttpClient, un objeto de tipo SnackBar y un objeto de tipo Router
-//Este constructor se encarga de inicializar las variables de la clase
-//
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
-     this.resetOptions();
+    this.resetOptions();
   }
-
-
-//Este metodo es el que se encarga de hacer el login
-//Recibe como parametros el username, password y el endPoint
-//Retorna un observable de cualquier tipo
-//Este metodo se encarga de hacer el login, y si el login es exitoso, se guarda el token en el local storage
-//Si el login no es exitoso, se muestra un mensaje de error
 
   login(username: string, password: string, endPoint: string): Observable<any> {
     return this.authBasic(username, password).post(endPoint).pipe(
-      map(token => {
+      map((token: Token) => {
+        const jwtHelper = new JwtHelperService();
         this.token = token;
-        this.token.username = new JwtHelperService().decodeToken(token.token).user;
-        this.token.password = new JwtHelperService().decodeToken(token.token).name;
-        this.token.roles = new JwtHelperService().decodeToken(token.token).roles;
-      }), catchError(error => {
-        return this.handleError(error);
-      })
+        this.token.username = jwtHelper.decodeToken(token.token).user;
+        this.token.password = jwtHelper.decodeToken(token.token).name;
+        this.token.roles = jwtHelper.decodeToken(token.token).roles;
+      }),
+      catchError(error => this.handleError(error))
     );
   }
 
-  //Este metodo se encarga de hacer el logout
-  //No recibe parametros
-  //No retorna nada
-  //Este metodo se encarga de borrar el token del local storage y redirigir al usuario a la pagina de login
   logout(): void {
     this.token = undefined;
     this.router.navigate(['']);
   }
 
-//Este metodo se encarga de obtener el token
-//No recibe parametros
-//Retorna un objeto de tipo Token
-  getToken(): Token {
+  getToken(): Token | undefined {
     return this.token;
   }
 
-  //Este metodo se encarga de obtener el token
-  //No recibe parametros
-  //Retorna un objeto de tipo Token
-
   param(key: string, value: string): HttpService {
-    this.params = this.params.append(key, value); // This class is immutable
+    this.params = this.params.append(key, value); // HttpParams is immutable
     return this;
   }
 
@@ -95,52 +72,42 @@ export class HttpService {
   }
 
   post(endpoint: string, body?: Object): Observable<any> {
-    return this.http.post(HttpService.API_END_POINT + endpoint, body, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
-        return this.handleError(error);
-      })
+    return this.http.post<any>(HttpService.API_END_POINT + endpoint, body, this.createOptions()).pipe(
+      map(response => this.extractData(response)),
+      catchError(error => this.handleError(error))
     );
   }
 
   get(endpoint: string): Observable<any> {
-    return this.http.get(HttpService.API_END_POINT + endpoint, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
-        return this.handleError(error);
-      })
+    return this.http.get<any>(HttpService.API_END_POINT + endpoint, this.createOptions()).pipe(
+      map(response => this.extractData(response)),
+      catchError(error => this.handleError(error))
     );
   }
 
   put(endpoint: string, body?: Object): Observable<any> {
-    return this.http.put(HttpService.API_END_POINT + endpoint, body, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
-        return this.handleError(error);
-      })
+    return this.http.put<any>(HttpService.API_END_POINT + endpoint, body, this.createOptions()).pipe(
+      map(response => this.extractData(response)),
+      catchError(error => this.handleError(error))
     );
   }
 
   patch(endpoint: string, body?: Object): Observable<any> {
-    return this.http.patch(HttpService.API_END_POINT + endpoint, body, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
-        return this.handleError(error);
-      })
+    return this.http.patch<any>(HttpService.API_END_POINT + endpoint, body, this.createOptions()).pipe(
+      map(response => this.extractData(response)),
+      catchError(error => this.handleError(error))
     );
   }
 
   delete(endpoint: string): Observable<any> {
-    return this.http.delete(HttpService.API_END_POINT + endpoint, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
-        return this.handleError(error);
-      })
+    return this.http.delete<any>(HttpService.API_END_POINT + endpoint, this.createOptions()).pipe(
+      map(response => this.extractData(response)),
+      catchError(error => this.handleError(error))
     );
   }
 
   private header(key: string, value: string): HttpService {
-    this.headers = this.headers.append(key, value); // This class is immutable
+    this.headers = this.headers.append(key, value); // HttpHeaders is immutable
     return this;
   }
 
@@ -155,74 +122,63 @@ export class HttpService {
   }
 
   private createOptions(): any {
-    if (this.token !== undefined) {
+    if (this.token) {
       this.header('Authorization', 'Bearer ' + this.token.token);
     }
     const options: any = {
       headers: this.headers,
       params: this.params,
       responseType: this.responseType,
-      observe: 'response'
+      observe: 'response' as const
     };
     this.resetOptions();
     return options;
   }
 
-  private extractData(response): any {
+  private extractData(response: any): any {
     if (this.successfulNotification) {
       this.snackBar.open(this.successfulNotification, '', {
         duration: 2000
       });
       this.successfulNotification = undefined;
     }
-    const contentType = response.headers.get('content-type');
+    const contentType: string | null = response.headers.get('content-type');
     if (contentType) {
-      if (contentType.indexOf('application/pdf') !== -1) {
-        const blob = new Blob([response.body], {type: 'application/pdf'});
+      if (contentType.includes('application/pdf')) {
+        const blob: Blob = new Blob([response.body], { type: 'application/pdf' });
         if (this.printDirectly) {
-          const iFrame = document.createElement('iframe');
+          const iFrame: HTMLIFrameElement = document.createElement('iframe');
           iFrame.src = URL.createObjectURL(blob);
           iFrame.style.visibility = 'hidden';
           document.body.appendChild(iFrame);
-          iFrame.contentWindow.focus();
-          iFrame.contentWindow.print();
+          iFrame.contentWindow?.focus();
+          iFrame.contentWindow?.print();
         } else {
           window.open(window.URL.createObjectURL(blob));
         }
-      } else if (contentType.indexOf('application/json') !== -1) {
-        return response.body; // with 'text': JSON.parse(response.body);
+      } else if (contentType.includes('application/json')) {
+        return response.body;
       }
     } else {
       return response;
     }
   }
 
-  private handleError(response): any {
-    let error: Error;
-    if (response.status === HttpService.UNAUTHORIZED) {
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status === HttpService.UNAUTHORIZED) {
       this.snackBar.open('Unauthorized', 'Error', {
         duration: 2000
       });
       this.logout();
       this.router.navigate(['']);
-      return throwError(response.error);
+      return throwError(() => error.error);
     } else {
-      try {
-        if (response.status === HttpService.NOT_FOUND) {
-          error = {error: 'Not Found', message: '', path: ''};
-        } else {
-          error = response.error; // with 'text': JSON.parse(response.error);
-        }
-        this.snackBar.open(error.error + ': ' + error.message, 'Error', {
-          duration: 5000
-        });
-        return throwError(error);
-      } catch (e) {
-        this.snackBar.open('No server response', 'Error', {
-          duration: 5000
-        });
-        return throwError(response.error);
-      }
+      const errorMsg = error.error?.error || 'No server response';
+      const errorMessage = error.error?.message || '';
+      this.snackBar.open(`${errorMsg}: ${errorMessage}`, 'Error', {
+        duration: 5000
+      });
+      return throwError(() => error.error || error);
     }
   }
 }
