@@ -1,0 +1,22 @@
+:host ::ng-deep .form-group label{
+    display: block;
+}
+:host ::ng-deep .form-group .form-control{
+width: 80%;
+display: inline-block;
+outline: none;
+}
+
+app-search{
+width: 100%;
+display: inline-block;
+}
+
+:host ::ng-deep div.p-2{
+border: 1px solid green;
+}
+
+:host ::ng-deep .form-group label{
+font-weight: bold;
+}
+

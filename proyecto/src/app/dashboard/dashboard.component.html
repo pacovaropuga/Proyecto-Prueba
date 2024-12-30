@@ -1,1 +1,44 @@
-<p>dashboard works!</p>
+<!-- Updated dashboard.html for Angular 18 -->
+<div class="row">
+    <div class="col-6">
+        <app-search></app-search>
+    </div>
+    <div class="col-6">
+        <app-summary *ngIf="dashboardService._term$ | async"></app-summary>
+    </div>
+    <div class="col-6">
+        <app-term *ngIf="dashboardService.newTerm$ | async"></app-term>
+    </div>
+    <div class="col-6">
+        <app-terms-crud *ngIf="(dashboardService._newEntry$ | async) || (dashboardService.displayTermCrud$ | async) || (dashboardService._term$ | async)"></app-terms-crud>
+    </div>
+    <div class="col-6">
+        <app-translations *ngIf="(dashboardService._newEntry$ | async) || (dashboardService._term$ | async)"></app-translations>
+    </div>
+    <div class="col-6">
+        <app-search-translation *ngIf="(dashboardService._newEntry$ | async) || (dashboardService._term$ | async)"></app-search-translation>
+    </div>
+    <div class="col-12">
+        <app-examples-crud *ngIf="(dashboardService._newEntry$ | async) || (dashboardService._term$ | async)"></app-examples-crud>
+    </div>
+    <div class="col-6">
+        <app-parents *ngIf="(dashboardService._newEntry$ | async) || (dashboardService._term$ | async)"></app-parents>
+    </div>
+    <div class="col-6">
+        <app-search-parents *ngIf="(dashboardService._newEntry$ | async) || (dashboardService._term$ | async)"></app-search-parents>
+    </div>
+    <div class="col-12">
+        <app-children *ngIf="(dashboardService._newEntry$ | async) || (dashboardService._term$ | async)"></app-children>
+    </div>
+    <div class="col-6">
+        <app-variants-crud *ngIf="(dashboardService._newEntry$ | async) || (dashboardService._term$ | async)"></app-variants-crud>
+    </div>
+    <div class="col-6">
+        <app-search-variant *ngIf="(dashboardService._newEntry$ | async) || (dashboardService._term$ | async)"></app-search-variant>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12" *ngIf="(dashboardService._newEntry$ | async) || (dashboardService._term$ | async)">
+        <button class="btn btn-success" style="margin-left: 2rem" (click)="save()">Save</button>
+    </div>
+</div>
