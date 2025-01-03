@@ -1,0 +1,95 @@
+<div class="p-2 m-4">
+    <h1 class="text-center">Examples</h1>
+  
+    <div class="row">
+      <div class="col-5">
+        <div class="form-control mb-3">
+          <label>Example</label>
+          <input class="form-control" #example />
+        </div>
+        <button class="btn btn-success" (click)="add(example.value, translation.value)">
+          Add new example
+        </button>
+        <button
+          class="btn btn-success d-inline-block"
+          style="margin-left: 5px"
+          (click)="addToAll(example.value, translation.value)"
+        >
+          Add to all translations
+        </button>
+      </div>
+  
+      <div class="col-5">
+        <div class="form-control">
+          <label>(Optional) Example translation</label>
+          <input class="form-control" #translation />
+        </div>
+      </div>
+  
+      <div class="col-2">
+        <div class="form-control">
+          <label class="d-block">Translations</label>
+          <div class="btn-group" dropdown>
+            <button
+              id="button-basic"
+              dropdownToggle
+              type="button"
+              class="btn btn-success dropdown-toggle"
+              aria-controls="dropdown-basic"
+            >
+              {{ translationSelected?.translation ? translationSelected.translation : 'Select translation' }}
+              <span class="caret"></span>
+            </button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem">
+                <a
+                  class="dropdown-item"
+                  *ngFor="let t of translations"
+                  (click)="selectTranslation(t)"
+                >
+                  {{ t.translation }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <table class="table table-sm mt-5">
+      <thead>
+        <tr>
+          <th>Example</th>
+          <th>Translation example</th>
+          <th>Translation</th>
+          <th>Status</th>
+          <th>Creator</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of examples">
+          <td [innerHTML]="e.example"></td>
+          <td [innerHTML]="e.translationExample"></td>
+          <td>{{ e.translation }}</td>
+          <td>{{ getStatus(e.idStatus) }}</td>
+          <td></td>
+          <td>
+            <i
+              class="fas fa-pencil-alt"
+              style="font-size: 1.1rem; color: #000000; cursor: pointer"
+              (click)="edit(e)"
+            ></i>
+            <i
+              class="fas fa-times"
+              style="font-size: 1.1rem; color: #ff0000; margin-left: 5px; cursor: pointer"
+              (click)="delete(e)"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button *ngIf="showUndo" class="btn btn-info" (click)="undo()">Undo</button>
+  </div>
+  

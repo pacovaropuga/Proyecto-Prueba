@@ -1,1 +1,23 @@
-<p>translationpanel works!</p>
+<mat-card class="my-3" *ngFor="let entry of searchService.entries$ | async">
+    <mat-card-subtitle>
+      <span class="word">{{ entry.entryName }}</span> =
+  
+      <ng-container *ngFor="let d of entry.data">
+        <a [routerLink]="['/home', d.EntryVisualization]" target="_blank">{{ d.EntryVisualization }}</a>
+        <span class="vertical-divider"></span>
+      </ng-container>
+      <br>
+      <div style="margin-left: 3.4rem;" *ngIf="searchService.entryLanguage === 'en'">
+        <img src="https://lexis.ugr.es/artwork/britishflag.png" alt="British Flag">
+        <img src="https://lexis.ugr.es/artwork/ldspkr_uk.png" alt="Speaker UK">
+        <img src="https://lexis.ugr.es/artwork/americanflag.jpg" style="margin-left: 1rem" alt="American Flag">
+        <img src="https://lexis.ugr.es/artwork/ldspkr_usa.png" alt="Speaker USA">
+      </div>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <app-examples [idEntry]="entry.idEntry"></app-examples>
+      <hr>
+      <app-variants [idTerm]="entry.idEntry"></app-variants>
+    </mat-card-content>
+  </mat-card>
+  

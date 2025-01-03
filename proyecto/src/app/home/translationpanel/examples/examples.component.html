@@ -1,1 +1,27 @@
-<p>examples works!</p>
+<ng-container *ngFor="let example of examples$ | async; let i = index; let c = count">
+    <!-- Botón para mostrar/ocultar ejemplos -->
+    <button class="btn-more" *ngIf="i === 0 && c > 1" (click)="display = !display">
+      {{ display ? '-' : '+' }}
+    </button>
+  
+    <!-- Contenedor para ejemplos visibles -->
+    <ng-container *ngIf="display || i === 0">
+      <span
+        style="margin-right: 5px"
+        [ngClass]="{ 'line-start': i !== 0 }"
+        class="example-text"
+        *ngIf="example.translation"
+      >
+        Ex.
+      </span>
+      <span class="example-text" [innerHTML]="example.translation"></span>
+  
+      <div class="d-inline-block">
+        <!-- Traducción del ejemplo -->
+        <span *ngIf="example.traduccion.length" style="color: #8d8a8a"> = </span>
+        <span class="example-text" style="color: #8d8a8a" [innerHTML]="example.traduccion"></span>
+      </div>
+      <br>
+    </ng-container>
+  </ng-container>
+  

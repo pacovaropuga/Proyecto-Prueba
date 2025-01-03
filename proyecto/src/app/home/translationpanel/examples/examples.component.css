@@ -1,0 +1,17 @@
+.btn-more {
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .example-text {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .line-start {
+    margin-left: 10px;
+  }
+  

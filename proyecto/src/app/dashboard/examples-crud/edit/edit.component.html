@@ -1,0 +1,63 @@
+<div style="padding: 1rem">
+    <h3>Edit Example</h3>
+  
+    <span class="d-block">Example</span>
+    <textarea rows="5" class="d-block w-100" [(ngModel)]="example.example"></textarea>
+    <span class="d-block" [innerHTML]="example.example"></span>
+  
+    <br />
+    <br />
+  
+    <span class="d-block">(Optional) Example translation</span>
+    <textarea rows="5" class="d-block w-100" [(ngModel)]="example.translationExample"></textarea>
+    <span class="d-block" [innerHTML]="example.translationExample"></span>
+  
+    <span class="d-block">Translations</span>
+    <div class="btn-group" dropdown>
+      <button
+        id="button-basic"
+        dropdownToggle
+        type="button"
+        class="btn btn-success dropdown-toggle"
+        aria-controls="dropdown-basic"
+      >
+        {{ translationSelected?.translation ? translationSelected.translation : 'Select translation' }}
+        <span class="caret"></span>
+      </button>
+      <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+        <li role="menuitem">
+          <a class="dropdown-item" *ngFor="let t of translations" (click)="selectTranslation(t)">
+            {{ t.translation }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  
+    <div class="form-group mb-2">
+      <label class="d-block">Status</label>
+  
+      <div class="btn-group" dropdown>
+        <button
+          dropdownToggle
+          type="button"
+          class="btn btn-{{ status.class }} dropdown-toggle"
+          aria-controls="dropdown-basic"
+        >
+          {{ status.name }} <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem">
+            <a class="dropdown-item" *ngFor="let s of statuses" (click)="status = s">{{ s.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <hr />
+  
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-danger" (click)="bsModalRef.hide()">Cancel</button>
+      <button class="btn btn-success" style="margin-left: 5px" (click)="save()">Save</button>
+    </div>
+  </div>
+  

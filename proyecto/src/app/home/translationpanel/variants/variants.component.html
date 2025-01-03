@@ -1,1 +1,20 @@
-<p>variants works!</p>
+<ng-container *ngFor="let entry of variants$ | async; let i = index">
+    <!-- Contenedor para cada entrada -->
+    <div class="my-3" *ngIf="i < 3 || display">
+      <span class="word">>> {{ entry.entryName }}</span> =
+      <!-- Visualización de datos -->
+      <ng-container *ngFor="let d of entry.data">
+        {{ d.EntryVisualization }}
+        <span class="vertical-divider"></span>
+      </ng-container>
+      <br />
+      <!-- Ejemplos relacionados -->
+      <app-examples [idEntry]="entry.idEntry"></app-examples>
+    </div>
+  </ng-container>
+  
+  <!-- Botón para mostrar/ocultar todas las entradas -->
+  <button class="btn-more" (click)="display = !display">
+    {{ display ? '- Less' : '+ All' }}
+  </button>
+  

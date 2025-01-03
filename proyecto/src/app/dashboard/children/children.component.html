@@ -1,0 +1,39 @@
+<div class="p-2 m-4">
+    <h1 class="text-center">Children</h1>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Translation</th>
+          <th>Status</th>
+          <th>Creator</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of children | paginate: { itemsPerPage: 10, currentPage: p }">
+          <td>
+            <a
+              routerLink="/dashboard"
+              [queryParams]="{ idTerm: c.idEntry, translation: c.entryName }"
+              target="_blank"
+            >
+              {{ c.entryName }}
+            </a>
+          </td>
+          <td>Available</td>
+          <td>Admin</td>
+          <td>
+            <button class="btn btn-danger" (click)="delete(c)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <pagination-controls
+      (pageChange)="p = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+    ></pagination-controls>
+  </div>
+  

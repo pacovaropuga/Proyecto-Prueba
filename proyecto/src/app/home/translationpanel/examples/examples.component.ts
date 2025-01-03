@@ -1,12 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../enviroments/enviroment';
 
 @Component({
   selector: 'app-examples',
-  standalone: true,
-  imports: [],
+  standalone: true, // Configuración standalone
+  imports: [CommonModule], // Eliminamos HttpClientModule, ya que no es necesario
   templateUrl: './examples.component.html',
-  styleUrl: './examples.component.css'
+  styleUrls: ['./examples.component.css'],
+  providers: [provideHttpClient()] // Configuración moderna de HttpClient
 })
-export class ExamplesComponent {
+export class ExamplesComponent implements OnInit {
+  @Input() idEntry!: number; // Declaramos el Input como requerido
+  examples$!: Observable<any>;
+  display = false;
 
+  // Inyección de HttpClient con la API inject
+  private http = inject(HttpClient);
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.examples$ = this.http.get(environment.API + '/api/examples', {
+      params: {
+        idEntry: this.idEntry.toString()
+      }
+    });
+  }
 }
+function provideHttpClient(): import("@angular/core").Provider {
+  throw new Error('Function not implemented.');
+}
+
