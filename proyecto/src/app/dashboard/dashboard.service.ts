@@ -3,7 +3,6 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../enviroments/enviroment';
 import { Entry } from '../core/models/entry.model';
-import { filter, skip } from 'rxjs/operators';
 import { Translation } from '../core/models/trasnslation.model';
 import { Variant } from '../core/models/variant.model';
 
@@ -11,11 +10,11 @@ import { Variant } from '../core/models/variant.model';
   providedIn: 'root'
 })
 export class DashboardService {
-
   private _term$ = new BehaviorSubject<Entry | null>(null);
   private _newEntry$ = new BehaviorSubject<string | null>(null);
-  private translations$ = new BehaviorSubject<Translation[]>([]);
-  private parents$ = new BehaviorSubject<any[]>([]);
+
+  public translations$ = new BehaviorSubject<Translation[]>([]);
+  public parents$ = new BehaviorSubject<any[]>([]);
 
   public language: string = '';
   public dashboardData: any = {};

@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DashboardService } from '../dashboard.service';
+import { DashboardService } from '../../dashboard.service';
 import { Translation } from '../../../core/models/trasnslation.model';
-import { Example } from '../../core/models/example.model';
+import { Example } from '../../../core/models/example.model';
 import { Status } from '../terms-crud/terms-crud.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { tap } from 'rxjs/operators';
@@ -19,8 +19,8 @@ export const statuses: Status[] = [
   selector: 'app-examples-crud',
   standalone: true,
   imports: [CommonModule, FormsModule, ModalModule], // Importamos los módulos necesarios
-  templateUrl: './examples.component.html',
-  styleUrls: ['./examples.component.css']
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
 export class ExamplesCrudComponent implements OnInit {
   entry: any;
@@ -76,7 +76,7 @@ export class ExamplesCrudComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dashboardService._term$.subscribe(term => {
+    this.dashboardService.term$.subscribe(term => {
       this.entry = term;
       this.loadExamples(this.entry.idEntry);
       console.log(term);

@@ -27,7 +27,7 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dashboardService._term$.subscribe((entry: any) => {
+    this.dashboardService.term$.subscribe((entry: any) => {
       this.parents$ = this.searchService.getParents(entry.idEntry).pipe(
         tap((p: Parent[]) => this.dashboardService.parents$.next(p)),
         map((parent: Parent[]) => parent.map(p => p.term).join(', '))

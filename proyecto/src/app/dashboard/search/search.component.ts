@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit {
         return;
       }
       this.currentEntry = this.entries[v - 1];
-      this.dashboardService._term$.next(this.currentEntry);
+      this.dashboardService.term$.next(this.currentEntry);
     });
   }
 
@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit {
     this.entryNumber.setValue(newValue, { emitEvent: false });
     this.currentEntry = this.entries[newValue - 1];
     this.currentEntry.index = newValue;
-    this.dashboardService._term$.next(this.currentEntry);
+    this.dashboardService.term$.next(this.currentEntry);
   }
 
   displayFn(term: any): string {
@@ -84,7 +84,7 @@ export class SearchComponent implements OnInit {
       this.entries = entries;
       this.currentEntry = entries[0];
       this.entryNumber.setValue(1, { emitEvent: false });
-      this.dashboardService._term$.next(this.currentEntry);
+      this.dashboardService.term$.next(this.currentEntry);
     });
   }
 

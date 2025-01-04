@@ -13,8 +13,8 @@ import { Status } from '../terms-crud/terms-crud.component';
   selector: 'app-examples-crud',
   standalone: true,
   imports: [CommonModule, FormsModule, ModalModule],
-  templateUrl: './examples.component.html',
-  styleUrls: ['./examples.component.css']
+  templateUrl: './examples-crud.component.html',
+  styleUrls: ['./examples-crud.component.css']
 })
 export class ExamplesCrudComponent implements OnInit {
   entry: any;
@@ -69,7 +69,7 @@ export class ExamplesCrudComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dashboardService._term$.subscribe(term => {
+    this.dashboardService.term$.subscribe(term => {
       this.entry = term;
       this.loadExamples(this.entry.idEntry);
       console.log(term);

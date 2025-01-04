@@ -38,7 +38,7 @@ export class TermComponent implements OnInit {
 
   newEntry(): void {
     if (this.term.language && this.term.term) {
-      this.dashboardService._newEntry$.next(this.term.term);
+      this.dashboardService.newEntry$.next(this.term.term);
     }
   }
 }

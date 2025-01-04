@@ -24,7 +24,7 @@ export class TranslationsComponent {
 
   private initializeSubscriptions(): void {
     // Suscripción a los cambios en el término seleccionado
-    this.dashboardService._term$.subscribe((entry: any) => {
+    this.dashboardService.term$.subscribe((entry: any) => {
       if (!entry) return;
 
       // Reinicia las listas
