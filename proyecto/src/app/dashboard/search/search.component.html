@@ -1,0 +1,71 @@
+<div class="p-2 m-4">
+    <h1 class="text-center">Search</h1>
+  
+    <div class="form-group">
+      <label>Term's name</label>
+      <input
+        type="text"
+        class="form-control"
+        [formControl]="autocompleteTermino"
+        [matAutocomplete]="auto"
+      />
+      <button class="btn btn-success">Search</button>
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayFn"
+        (optionSelected)="seleccionarTermino($event.option.value)"
+      >
+        <mat-option
+          *ngFor="let word of words$ | async"
+          [value]="word"
+        >
+          <img
+            width="20px"
+            [src]="word.language === 'en' ? 'https://lexis.ugr.es/artwork/britishflag.png' : 'https://lexis.ugr.es/artwork/es.png'"
+            alt=""
+          />
+          {{ word.term }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  
+    <div class="form-group">
+      <label>Entry number <span style="font-weight: bold">{{ entryNOfM }}</span></label>
+      <input type="text" class="form-control" [formControl]="entryNumber" />
+      <button class="btn btn-info btn-nav" (click)="changeEntryNumber(-1)">&lt;</button>
+      <button class="btn btn-info btn-nav" (click)="changeEntryNumber(1)">&gt;</button>
+      <button class="btn btn-success">Go</button>
+    </div>
+  
+    <div class="form-group">
+      <label>Id term</label>
+      <input type="text" class="form-control" [value]="idTerm" readonly />
+      <button class="btn btn-info btn-nav">&lt;</button>
+      <button class="btn btn-info btn-nav">&gt;</button>
+      <button class="btn btn-success">Go</button>
+    </div>
+  
+    <div class="form-group">
+      <label>Id entry</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="currentEntry?.idEntry"
+        readonly
+      />
+      <button class="btn btn-info btn-nav" (click)="changeEntryNumber(-1)">&lt;</button>
+      <button class="btn btn-info btn-nav" (click)="changeEntryNumber(1)">&gt;</button>
+      <button class="btn btn-success">Go</button>
+    </div>
+  
+    <div class="form-group">
+      <label>Term's List</label>
+      <input type="text" class="form-control" />
+      <button class="btn btn-info btn-nav">&lt;</button>
+      <button class="btn btn-info btn-nav">&gt;</button>
+      <button class="btn btn-success">Go</button>
+    </div>
+  
+    <button class="btn btn-success mt-2" (click)="newTerm()">New term</button>
+  </div>
+  

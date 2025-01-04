@@ -1,0 +1,86 @@
+<div class="p-2 m-4">
+    <h1 class="text-center">Variants</h1>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-control mb-3">
+                <label>
+                    Variant
+                </label>
+                <input class="form-control" #variant>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-control">
+                <label>
+                    (Optional) Grammar
+                </label>
+                <input class="form-control" #grammar>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-success" (click)="add(variant.value, grammar.value)">
+        Add new
+    </button>
+    <button class="btn btn-danger d-inline-block" style="margin-left: 5px" (click)="deleteAll()">
+        Delete all
+    </button>
+    <button class="btn btn-secondary d-inline-block" style="margin-left: 5px">
+        Download
+    </button>
+    <button class="btn btn-success d-inline-block" style="margin-left: 5px">
+        View conjugates
+    </button>
+
+    <table class="table table-sm mt-5">
+        <thead>
+        <tr>
+            <th>Variant</th>
+            <th>Grammar</th>
+            <th>Status</th>
+            <th>Creator</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody *for="let v of variants">
+        <tr>
+            <td>{{ v.variant }}</td>
+            <td>{{ v.grammar }}</td>
+            <td>{{ status(v.idStatus) }}</td>
+            <td>{{ v.creator }}</td>
+            <td>
+                <i 
+                    class="fas fa-pencil-alt" 
+                    style="font-size: 1.1rem; color: #000000; cursor: pointer;" 
+                    (click)="edit(v)"
+                ></i>
+                <i 
+                    class="fas fa-times" 
+                    style="font-size: 1.1rem; color: #ff0000; margin-left: 5px; cursor: pointer;" 
+                    (click)="delete(v)"
+                ></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-6">
+            <div *if="adds.length">
+                <span style="color: green" class="d-block">Adds</span>
+                <ul>
+                    <li *for="let d of adds">{{ d.variant }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div *if="deletes.length">
+                <span style="color: red" class="d-block">Deletes</span>
+                <ul>
+                    <li *for="let d of deletes">{{ d.variant }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

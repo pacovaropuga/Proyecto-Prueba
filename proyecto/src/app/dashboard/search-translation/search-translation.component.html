@@ -1,0 +1,59 @@
+<div class="p-2 m-4">
+    <h1 class="text-center">Search Translation</h1>
+
+    <!-- Campo de entrada con autocompletado -->
+    <div class="form-group">
+        <label>Translation</label>
+        <input 
+            type="text" 
+            class="form-control" 
+            matInput 
+            [formControl]="autocompleteTermino"
+            [matAutocomplete]="auto">
+        <button class="btn btn-success">Search</button>
+
+        <!-- Autocompletado -->
+        <mat-autocomplete 
+            #auto="matAutocomplete" 
+            [displayWith]="displayFn" 
+            (optionSelected)="seleccionarTermino($event.option.value)">
+            <mat-option *ngFor="let word of words$ | async" [value]="word">
+                <img 
+                    width="20px" 
+                    [src]="word.language === 'en' 
+                        ? 'https://lexis.ugr.es/artwork/britishflag.png' 
+                        : 'https://lexis.ugr.es/artwork/es.png'" 
+                    alt="flag">
+                {{ word.term }}
+            </mat-option>
+        </mat-autocomplete>
+    </div>
+
+    <!-- Tabla de resultados -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Entry</th>
+                <th>Translation</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of entries; let i = index">
+                <td>
+                    {{ e.entryName }}<sup>{{ i + 1 }}</sup>
+                </td>
+                <td>
+                    {{ e.translationsString }}
+                </td>
+                <td>
+                    <i 
+                        class="fa fa-plus" 
+                        style="color: green; font-size: 1.4rem; cursor: pointer" 
+                        (click)="addTo(e, i + 1)">
+                    </i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

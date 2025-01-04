@@ -1,0 +1,34 @@
+<div class="p-2 m-4">
+    <h1 class="text-center">Summary</h1>
+
+    <!-- Entry Name -->
+    <h4 style="font-weight: bold">Entry</h4>
+    <div>{{ entry?.entryName }}</div>
+
+    <!-- Language -->
+    <h4 style="font-weight: bold">Language</h4>
+    <div>
+        <img 
+            width="20px" 
+            [src]="dashboardService.language === 'en' 
+                ? 'https://lexis.ugr.es/artwork/britishflag.png' 
+                : 'https://lexis.ugr.es/artwork/es.png'" 
+            alt="flag">
+    </div>
+
+    <!-- Translations -->
+    <h4 style="font-weight: bold">Translation</h4>
+    <div>{{ entries }}</div>
+
+    <!-- Parents -->
+    <h4 style="font-weight: bold">Parents</h4>
+    <div>
+        <span>{{ parents$ | async }}</span>
+    </div>
+
+    <!-- Children -->
+    <h4 style="font-weight: bold">Children</h4>
+    <div>
+        <span>{{ terms$ | async }}</span>
+    </div>
+</div>

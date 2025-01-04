@@ -1,0 +1,40 @@
+<div style="padding: 1rem">
+    <h3>Edit Example</h3>
+    <label for="variant" class="d-block">Variant</label>
+    <input id="variant" type="text" class="d-block w-100" [(ngModel)]="variant.variant" />
+  
+    <br />
+    <label for="grammar" class="d-block">(Optional) Grammar</label>
+    <input id="grammar" type="text" class="d-block w-100" [(ngModel)]="variant.grammar" />
+  
+    <div class="form-group mb-2">
+      <label for="status" class="d-block">Status</label>
+      <div class="btn-group">
+        <button
+          id="status"
+          type="button"
+          class="btn btn-{{ status?.class }} dropdown-toggle"
+          (click)="toggleDropdown()"
+        >
+          {{ status?.name }} <span class="caret"></span>
+        </button>
+        <ul *ngIf="dropdownOpen" class="dropdown-menu" role="menu">
+          <li
+            role="menuitem"
+            *ngFor="let s of statuses"
+            class="dropdown-item"
+            (click)="selectStatus(s)"
+          >
+            {{ s.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <hr />
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-danger" (click)="close()">Cancel</button>
+      <button class="btn btn-success" style="margin-left: 5px" (click)="save()">Save</button>
+    </div>
+  </div>
+  

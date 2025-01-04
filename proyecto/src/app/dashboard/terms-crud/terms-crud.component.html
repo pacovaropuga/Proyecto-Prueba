@@ -1,0 +1,72 @@
+<div class="p-2 m-4">
+    <h1 class="text-center">{{ entry.entryName }}</h1>
+    <button class="btn btn-success my-2 d-block" (click)="changeTerm()">Change Term</button>
+
+    <div class="form-group mb-2">
+        <label>Entry Display</label>
+        <input type="text" class="form-control" [(ngModel)]="entry.entryName" placeholder="Enter entry name">
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Status</label>
+        <div class="btn-group" dropdown>
+            <button id="button-basic" dropdownToggle type="button" class="btn btn-{{ status.class || 'secondary' }} dropdown-toggle"
+                    aria-controls="dropdown-basic">
+                {{ status.name || 'Select Status' }} <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                <li role="menuitem">
+                    <a class="dropdown-item" *ngFor="let s of statuses" (click)="status = s">{{ s.name }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Index</label>
+        <input type="text" class="form-control" [(ngModel)]="entry.index" placeholder="Enter index">
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Note</label>
+        <input type="text" class="form-control" [(ngModel)]="entry.note" placeholder="Enter note">
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Annotation</label>
+        <input type="text" class="form-control" [(ngModel)]="entry.annotation" placeholder="Enter annotation">
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Grammar</label>
+        <input type="text" class="form-control" [(ngModel)]="entry.grammar" placeholder="Enter grammar">
+    </div>
+
+    <div class="form-group mb-2">
+        <label class="control-label">Audio English</label>
+        <p>{{ entry.audioEnglish || 'No file uploaded' }}</p>
+        <input type="file" id="audioEnglish" name="audioEnglish" accept=".mp3,.wav" class="form-control" (change)="uploadAudio($event, 'audioEnglish')">
+        <br>
+        <button class="btn btn-danger mt-2" (click)="deleteAudio('audioEnglish')">Delete</button>
+        <audio controls *ngIf="entry.audioEnglish" [src]="entry.audioEnglish"></audio>
+    </div>
+
+    <div class="form-group mb-2">
+        <label class="control-label">Audio USA</label>
+        <p>{{ entry.audioUSA || 'No file uploaded' }}</p>
+        <input type="file" id="audioUSA" name="audioUSA" accept=".mp3,.wav" class="form-control" (change)="uploadAudio($event, 'audioUSA')">
+        <br>
+        <button class="btn btn-danger mt-2" (click)="deleteAudio('audioUSA')">Delete</button>
+        <audio controls *ngIf="entry.audioUSA" [src]="entry.audioUSA"></audio>
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Creator</label>
+        <p>{{ entry.creator || 'Unknown' }}</p>
+    </div>
+
+    <div class="form-group">
+        <label>Last Update</label>
+        <p>{{ entry.lastUpdate || 'Unknown' }}</p>
+    </div>
+</div>

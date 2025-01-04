@@ -1,0 +1,59 @@
+<div class="p-2 m-4">
+    <h1 class="text-center">Parents</h1>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Entry</th>
+          <th>Translations</th>
+          <th>Status</th>
+          <th>Creator</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of parents">
+          <td>
+            <a
+              routerLink="/dashboard"
+              [queryParams]="{ idTerm: p.idTerm, translation: p.term }"
+              target="_blank"
+            >
+              {{ p.term }}
+            </a>
+          </td>
+          <td>{{ p.translations }}</td>
+          <td>{{ p.status }}</td>
+          <td>{{ p.creator }}</td>
+          <td>
+            <i
+              class="fas fa-times"
+              style="font-size: 1.1rem; color: #ff0000; margin-left: 5px; cursor: pointer;"
+              (click)="delete(p)"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="row">
+      <div class="col-6">
+        <ng-container *ngIf="adds.length">
+          <span style="color: green" class="d-block">Adds</span>
+          <ul>
+            <li *ngFor="let d of adds">{{ d.term }}</li>
+          </ul>
+        </ng-container>
+      </div>
+  
+      <div class="col-6">
+        <ng-container *ngIf="deletes.length">
+          <span style="color: red" class="d-block">Deletes</span>
+          <ul>
+            <li *ngFor="let d of deletes">{{ d.term }}</li>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  

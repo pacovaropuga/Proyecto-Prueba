@@ -2,12 +2,18 @@ import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DashboardService } from '../dashboard.service';
-import { Translation } from '../../core/models/translation.model';
+import { Translation } from '../../../core/models/trasnslation.model';
 import { Example } from '../../core/models/example.model';
 import { Status } from '../terms-crud/terms-crud.component';
-import { EditComponent, statuses } from './edit/edit.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { tap } from 'rxjs/operators';
+
+// Exportamos los statuses para que estén disponibles globalmente
+export const statuses: Status[] = [
+  { id: 1, name: 'Available', class: 'success' },
+  { id: 2, name: 'Not Available', class: 'danger' },
+  { id: 3, name: 'Under Review', class: 'warning' }
+];
 
 @Component({
   selector: 'app-examples-crud',

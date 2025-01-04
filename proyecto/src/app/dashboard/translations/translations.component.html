@@ -1,0 +1,73 @@
+<div class="p-2 m-4">
+    <h1 class="text-center">Translations</h1>
+
+    <table class="table" *ngIf="translations?.length">
+        <thead>
+            <tr>
+                <th>Translation</th>
+                <th>Move</th>
+                <th>Status</th>
+                <th>Creator</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let d of translations">
+                <td>
+                    <a 
+                        [routerLink]="['/dashboard']" 
+                        [queryParams]="{ idEntry: d.idTerm, translation: d.translation }"
+                        target="_blank"
+                    >
+                        {{ d.translation }}
+                    </a>
+                </td>
+                <td>
+                    <i 
+                        class="fa fa-arrow-up" 
+                        style="font-size: 1.1rem; color: green"
+                        (click)="moveUp(d)"
+                    ></i>
+                    <i 
+                        class="fa fa-arrow-down" 
+                        style="font-size: 1.1rem; color: red; margin-left: 5px"
+                        (click)="moveDown(d)"
+                    ></i>
+                </td>
+                <td>{{ d.status }}</td>
+                <td>{{ d.creator }}</td>
+                <td>
+                    <i 
+                        class="fas fa-times" 
+                        style="font-size: 1.1rem; color: red; cursor: pointer"
+                        (click)="delete(d)"
+                    ></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="!translations?.length">
+        <i class="fa fa-info-circle text-info"></i> There aren't translations
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-6">
+            <ng-container *ngIf="adds?.length">
+                <span style="color: green" class="d-block">Adds</span>
+                <ul>
+                    <li *ngFor="let d of adds">{{ d.translation }}</li>
+                </ul>
+            </ng-container>
+        </div>
+
+        <div class="col-6">
+            <ng-container *ngIf="deletes?.length">
+                <span style="color: red" class="d-block">Deletes</span>
+                <ul>
+                    <li *ngFor="let d of deletes">{{ d.translation }}</li>
+                </ul>
+            </ng-container>
+        </div>
+    </div>
+</div>
