@@ -9,17 +9,16 @@ import { SearchService } from '../../home/search.service';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
-  selector: 'app-search-parents',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatOptionModule
-  ],
-  templateUrl: './search-parents.component.html',
-  styleUrls: ['./search-parents.component.css']
+    selector: 'app-search-parents',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatOptionModule
+    ],
+    templateUrl: './search-parents.component.html',
+    styleUrls: ['./search-parents.component.css']
 })
 export class SearchParentsComponent implements OnInit {
   words$: any;

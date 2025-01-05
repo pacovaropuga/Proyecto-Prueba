@@ -7,17 +7,16 @@ import { ExamplesComponent } from './examples/examples.component'; // Importa Ex
 import { SearchService } from '../search.service';
 
 @Component({
-  selector: 'app-translationpanel',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    RouterModule,
-    VariantsComponent, // Importa VariantsComponent
-    ExamplesComponent  // Importa ExamplesComponent
-  ],
-  templateUrl: './translationpanel.component.html',
-  styleUrls: ['./translationpanel.component.css']
+    selector: 'app-translationpanel',
+    imports: [
+        CommonModule,
+        MatCardModule,
+        RouterModule,
+        VariantsComponent, // Importa VariantsComponent
+        ExamplesComponent // Importa ExamplesComponent
+    ],
+    templateUrl: './translationpanel.component.html',
+    styleUrls: ['./translationpanel.component.css']
 })
 export class TranslationpanelComponent implements OnInit {
   public searchService = inject(SearchService);

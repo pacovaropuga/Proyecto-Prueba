@@ -9,11 +9,10 @@ import { CommonModule } from '@angular/common';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-variants-crud',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './variants-crud.component.html',
-  styleUrls: ['./variants-crud.component.css']
+    selector: 'app-variants-crud',
+    imports: [CommonModule],
+    templateUrl: './variants-crud.component.html',
+    styleUrls: ['./variants-crud.component.css']
 })
 export class VariantsCrudComponent {
   variants: Variant[] = [];

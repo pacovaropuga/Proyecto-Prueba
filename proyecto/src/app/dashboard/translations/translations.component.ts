@@ -7,11 +7,10 @@ import { Observable } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-translations',
-  standalone: true, // Marca el componente como standalone
-  imports: [CommonModule,RouterModule], // Importa módulos necesarios como CommonModule
-  templateUrl: './translations.component.html',
-  styleUrls: ['./translations.component.css']
+    selector: 'app-translations', // Marca el componente como standalone
+    imports: [CommonModule, RouterModule], // Importa módulos necesarios como CommonModule
+    templateUrl: './translations.component.html',
+    styleUrls: ['./translations.component.css']
 })
 export class TranslationsComponent {
   translations: Translation[] = [];

@@ -9,17 +9,16 @@ import { SearchService } from '../../home/search.service';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
-  selector: 'app-search-translation',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatOptionModule
-  ],
-  templateUrl: './search-translation.component.html',
-  styleUrls: ['./search-translation.component.css']
+    selector: 'app-search-translation',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatOptionModule
+    ],
+    templateUrl: './search-translation.component.html',
+    styleUrls: ['./search-translation.component.css']
 })
 export class SearchTranslationComponent implements OnInit {
   words$: any;

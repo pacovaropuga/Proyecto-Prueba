@@ -10,17 +10,16 @@ import { DashboardService } from '../dashboard.service';
 import { Variant } from '../../core/models/variant.model';
 
 @Component({
-  selector: 'app-search-variant',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatOptionModule
-  ],
-  templateUrl: './search-variant.component.html',
-  styleUrls: ['./search-variant.component.css']
+    selector: 'app-search-variant',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatOptionModule
+    ],
+    templateUrl: './search-variant.component.html',
+    styleUrls: ['./search-variant.component.css']
 })
 export class SearchVariantComponent implements OnInit {
   words$: any;

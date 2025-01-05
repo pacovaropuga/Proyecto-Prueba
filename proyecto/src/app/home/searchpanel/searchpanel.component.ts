@@ -19,18 +19,17 @@ interface Word {
 }
 
 @Component({
-  selector: 'app-searchpanel',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatIconModule,
-  ],
-  templateUrl: './searchpanel.component.html',
-  styleUrls: ['./searchpanel.component.css'],
+    selector: 'app-searchpanel',
+    imports: [
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatIconModule,
+    ],
+    templateUrl: './searchpanel.component.html',
+    styleUrls: ['./searchpanel.component.css']
 })
 export class SearchpanelComponent implements OnInit {
   autocompleteTermino = new FormControl('');

@@ -20,27 +20,26 @@ import { SearchTranslationComponent } from './search-translation/search-translat
 
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ModalModule,
-    ChildrenComponent,
-    ExamplesCrudComponent,
-    ParentsComponent,
-    VariantsCrudComponent,
-    SearchComponent,
-    SearchParentsComponent,
-    SearchVariantComponent,
-    SummaryComponent,
-    TermComponent,
-    TermsCrudComponent,
-    TranslationsComponent,
-    SearchTranslationComponent
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-dashboard',
+    imports: [
+        CommonModule,
+        FormsModule,
+        ModalModule,
+        ChildrenComponent,
+        ExamplesCrudComponent,
+        ParentsComponent,
+        VariantsCrudComponent,
+        SearchComponent,
+        SearchParentsComponent,
+        SearchVariantComponent,
+        SummaryComponent,
+        TermComponent,
+        TermsCrudComponent,
+        TranslationsComponent,
+        SearchTranslationComponent
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 

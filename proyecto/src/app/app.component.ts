@@ -9,20 +9,18 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule, 
-    RouterModule,
-    RouterOutlet,
-    DashboardComponent,
-    LoginComponent,
-    HomeComponent,
-    NgxSpinnerModule,
-    
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    imports: [
+        CommonModule,
+        RouterModule,
+        RouterOutlet,
+        DashboardComponent,
+        LoginComponent,
+        HomeComponent,
+        NgxSpinnerModule,
+    ],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'proyecto';

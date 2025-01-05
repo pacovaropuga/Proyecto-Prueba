@@ -7,11 +7,10 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-summary',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.css']
+    selector: 'app-summary',
+    imports: [CommonModule],
+    templateUrl: './summary.component.html',
+    styleUrls: ['./summary.component.css']
 })
 export class SummaryComponent implements OnInit {
   terms$!: Observable<string>;

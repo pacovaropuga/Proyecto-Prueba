@@ -6,11 +6,10 @@ import { Term } from '../../core/models/term.model';
 import { filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-term',
-  standalone: true,
-  imports: [CommonModule, FormsModule], // Importamos FormsModule
-  templateUrl: './term.component.html',
-  styleUrls: ['./term.component.css']
+    selector: 'app-term',
+    imports: [CommonModule, FormsModule], // Importamos FormsModule
+    templateUrl: './term.component.html',
+    styleUrls: ['./term.component.css']
 })
 export class TermComponent implements OnInit {
   term: Term;

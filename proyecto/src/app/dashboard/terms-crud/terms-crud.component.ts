@@ -11,11 +11,10 @@ export interface Status {
 }
 
 @Component({
-  selector: 'app-terms-crud',
-  standalone: true,
-  imports: [FormsModule, CommonModule], // Importamos FormsModule y CommonModule
-  templateUrl: './terms-crud.component.html',
-  styleUrls: ['./terms-crud.component.css'],
+    selector: 'app-terms-crud',
+    imports: [FormsModule, CommonModule], // Importamos FormsModule y CommonModule
+    templateUrl: './terms-crud.component.html',
+    styleUrls: ['./terms-crud.component.css']
 })
 export class TermsCrudComponent implements OnInit {
   statuses: Status[] = [

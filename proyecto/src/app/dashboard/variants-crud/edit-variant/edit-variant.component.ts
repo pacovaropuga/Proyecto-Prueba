@@ -8,11 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-edit-variant',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './edit-variant.component.html',
-  styleUrls: ['./edit-variant.component.css'],
+    selector: 'app-edit-variant',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './edit-variant.component.html',
+    styleUrls: ['./edit-variant.component.css']
 })
 export class EditVariantComponent implements OnInit {
   translations: Translation[] = [];

@@ -10,11 +10,10 @@ import { Example } from '../../core/models/example.model';
 import { Status } from '../terms-crud/terms-crud.component';
 
 @Component({
-  selector: 'app-examples-crud',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ModalModule],
-  templateUrl: './examples-crud.component.html',
-  styleUrls: ['./examples-crud.component.css']
+    selector: 'app-examples-crud',
+    imports: [CommonModule, FormsModule, ModalModule],
+    templateUrl: './examples-crud.component.html',
+    styleUrls: ['./examples-crud.component.css']
 })
 export class ExamplesCrudComponent implements OnInit {
   entry: any;

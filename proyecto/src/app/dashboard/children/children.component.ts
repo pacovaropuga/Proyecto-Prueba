@@ -5,15 +5,14 @@ import { NgxPaginationModule } from 'ngx-pagination'; // Biblioteca de paginaci�
 import { DashboardService } from '../dashboard.service'; // Servicio necesario
 
 @Component({
-  selector: 'app-children',
-  standalone: true, // Componente standalone
-  imports: [
-    CommonModule,
-    RouterModule,
-    NgxPaginationModule // Para paginación
-  ],
-  templateUrl: './children.component.html',
-  styleUrls: ['./children.component.css']
+    selector: 'app-children', // Componente standalone
+    imports: [
+        CommonModule,
+        RouterModule,
+        NgxPaginationModule // Para paginación
+    ],
+    templateUrl: './children.component.html',
+    styleUrls: ['./children.component.css']
 })
 export class ChildrenComponent implements OnInit {
   children: any[] = []; // Datos de los niños

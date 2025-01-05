@@ -5,12 +5,11 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../enviroments/enviroment';
 
 @Component({
-  selector: 'app-examples',
-  standalone: true, // Configuración standalone
-  imports: [CommonModule], // Eliminamos HttpClientModule, ya que no es necesario
-  templateUrl: './examples.component.html',
-  styleUrls: ['./examples.component.css'],
-  providers: [provideHttpClient()] // Configuración moderna de HttpClient
+    selector: 'app-examples', // Configuración standalone
+    imports: [CommonModule], // Eliminamos HttpClientModule, ya que no es necesario
+    templateUrl: './examples.component.html',
+    styleUrls: ['./examples.component.css'],
+    providers: [provideHttpClient()] // Configuración moderna de HttpClient
 })
 export class ExamplesComponent implements OnInit {
   @Input() idEntry!: number; // Declaramos el Input como requerido

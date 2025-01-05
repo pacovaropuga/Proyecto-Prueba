@@ -16,11 +16,10 @@ export const statuses: Status[] = [
 ];
 
 @Component({
-  selector: 'app-examples-crud',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ModalModule], // Importamos los módulos necesarios
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+    selector: 'app-examples-crud',
+    imports: [CommonModule, FormsModule, ModalModule], // Importamos los módulos necesarios
+    templateUrl: './edit.component.html',
+    styleUrls: ['./edit.component.css']
 })
 export class ExamplesCrudComponent implements OnInit {
   entry: any;

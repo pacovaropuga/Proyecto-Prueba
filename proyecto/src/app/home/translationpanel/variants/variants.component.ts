@@ -5,11 +5,10 @@ import { SearchService } from '../../search.service';
 import { ExamplesComponent } from '../examples/examples.component'; // Importar ExamplesComponent
 
 @Component({
-  selector: 'app-variants',
-  standalone: true, // Configuración standalone
-  imports: [CommonModule, ExamplesComponent], // Importar ExamplesComponent
-  templateUrl: './variants.component.html',
-  styleUrls: ['./variants.component.css']
+    selector: 'app-variants', // Configuración standalone
+    imports: [CommonModule, ExamplesComponent], // Importar ExamplesComponent
+    templateUrl: './variants.component.html',
+    styleUrls: ['./variants.component.css']
 })
 export class VariantsComponent implements OnInit {
   @Input() idTerm!: number; // Declaramos el Input como requerido

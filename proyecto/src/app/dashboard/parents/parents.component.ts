@@ -6,11 +6,10 @@ import { Parent } from '../../core/models/parent.model';
 import { SearchService } from '../../home/search.service';
 
 @Component({
-  selector: 'app-parents',
-  standalone: true,
-  imports: [CommonModule, RouterModule], // Incluye RouterModule en los imports
-  templateUrl: './parents.component.html',
-  styleUrls: ['./parents.component.css']
+    selector: 'app-parents',
+    imports: [CommonModule, RouterModule], // Incluye RouterModule en los imports
+    templateUrl: './parents.component.html',
+    styleUrls: ['./parents.component.css']
 })
 export class ParentsComponent implements OnInit {
   parents: Parent[] = [];
