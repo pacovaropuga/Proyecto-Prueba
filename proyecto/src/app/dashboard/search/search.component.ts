@@ -51,7 +51,8 @@ export class SearchComponent implements OnInit {
 
     // Manejo de los cambios en el número de entrada
     this.entryNumber.valueChanges.subscribe(v => {
-      if (isNaN(v) || v > this.entries.length || v < 1) {
+      if (v === null || isNaN(v) || v > this.entries.length || v < 1)
+        {
         this.currentEntry = null;
         return;
       }

@@ -54,7 +54,7 @@ export class SearchParentsComponent implements OnInit {
 
   seleccionarTermino(option: any): void {
     this.selected = option;
-    this.searchService.getEntries(option.idTerm, option.term).subscribe((r: any) => {
+    this.searchService.getEntries(option.idTerm).subscribe((r: any) => {
       r.forEach((d: any) => {
         d.translationsString = d.data.map((entry: any) => entry.EntryVisualization).join(',');
       });

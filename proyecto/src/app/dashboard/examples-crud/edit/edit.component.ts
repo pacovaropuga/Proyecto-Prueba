@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { DashboardService } from '../../dashboard.service';
 import { Translation } from '../../../core/models/trasnslation.model';
 import { Example } from '../../../core/models/example.model';
-import { Status } from '../terms-crud/terms-crud.component';
+import { Status } from '../../terms-crud/terms-crud.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { tap } from 'rxjs/operators';
 
@@ -21,7 +21,7 @@ export const statuses: Status[] = [
     templateUrl: './edit.component.html',
     styleUrls: ['./edit.component.css']
 })
-export class ExamplesCrudComponent implements OnInit {
+export class EditComponent implements OnInit {
   entry: any;
   translationSelected!: Translation;
   translations: Translation[] = [];
@@ -30,6 +30,9 @@ export class ExamplesCrudComponent implements OnInit {
   showUndo = false;
   deletes: Example[] = [];
   statuses: Status[] = statuses;
+  example: any = {};
+  status: any = {};
+
 
   examples: Example[] = [];
 
@@ -40,7 +43,8 @@ export class ExamplesCrudComponent implements OnInit {
   constructor() {}
 
   private loadExamples(idEntry: number): void {
-    this.dashboardService.getTranslations(idEntry).subscribe((t: any[]) => {
+    this.dashboardService.getTranslations(idEntry).subscribe((t: any) => {
+
       t.forEach(d => {
         this.examples.push({
           idExample: d.idExample,

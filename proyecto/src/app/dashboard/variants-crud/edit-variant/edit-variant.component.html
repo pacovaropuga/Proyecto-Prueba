@@ -13,10 +13,10 @@
         <button
           id="status"
           type="button"
-          class="btn btn-{{ status?.class }} dropdown-toggle"
+          class="btn btn-{{ status.class }} dropdown-toggle"
           (click)="toggleDropdown()"
         >
-          {{ status?.name }} <span class="caret"></span>
+          {{ status.name }} <span class="caret"></span>
         </button>
         <ul *ngIf="dropdownOpen" class="dropdown-menu" role="menu">
           <li

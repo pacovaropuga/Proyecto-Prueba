@@ -1,9 +1,10 @@
 export class Variant {
-    idVariant: number;
+
     idEntry?:number
-    creator: string;
-    idStatus: number;
-    variant: string;
-    grammar: string;
+    idVariant: number = 0;
+    creator: string = '';
+    idStatus: number = 0;
+    variant: string = '';
+    grammar: string = '';
 
 }

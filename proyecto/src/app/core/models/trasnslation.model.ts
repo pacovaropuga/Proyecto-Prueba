@@ -1,7 +1,7 @@
 export class Translation {
-    idTerm: number
-    translation: string
-    status: string
-    creator: string
+    idTerm: number = 0;
+    translation: string = '';
+    status: string = '';
+    creator: string = '';
     examples?: any[];
 }
