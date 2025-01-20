@@ -1,6 +1,6 @@
 export class Variant {
 
-    idEntry?:number
+    idEntry?:number  = 0;
     idVariant: number = 0;
     creator: string = '';
     idStatus: number = 0;
