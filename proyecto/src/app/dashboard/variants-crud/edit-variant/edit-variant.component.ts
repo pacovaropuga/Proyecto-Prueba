@@ -18,7 +18,7 @@ export class EditVariantComponent implements OnInit {
   translationSelected: Translation | null = null;
 
   variant!: Variant;
-
+  dropdownOpen = false;
   statuses = statuses;
   status!: Status;
 
@@ -29,14 +29,22 @@ export class EditVariantComponent implements OnInit {
   ngOnInit(): void {
     this.status = statuses.find((s) => s.id === this.variant.idStatus)!;
   }
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+}
 
+  selectStatus(status: any): void {
+    this.status = status;
+}
   save(): void {
     if (this.status) {
       this.variant.idStatus = this.status.id;
       this.saveCallback(this.variant);
     }
   }
-
+  close(): void {
+    this.saveCallback(this.variant);
+  }
   selectTranslation(t: Translation): void {
     this.translationSelected = t;
   }

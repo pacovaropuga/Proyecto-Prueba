@@ -40,7 +40,7 @@ export class SummaryComponent implements OnInit {
       this.entry = entry;
       console.log(this.entry);
 
-      this.searchService.getEntries(this.entry.idEntry, '').subscribe(d => {
+      this.searchService.getEntries(this.entry.idEntry).subscribe(d => {
         console.log(d);
       });
     });

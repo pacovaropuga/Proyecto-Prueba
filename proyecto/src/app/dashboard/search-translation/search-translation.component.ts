@@ -54,12 +54,20 @@ export class SearchTranslationComponent implements OnInit {
 
   seleccionarTermino(option: any): void {
     this.selected = option;
-    this.searchService.getEntries(option.idTerm, option.term).subscribe((r: any) => {
-      r.forEach((d: any) => {
-        d.translationsString = d.data.map((entry: any) => entry.EntryVisualization).join(',');
-      });
-      this.entries = r;
-      console.log(this.entries);
+
+    // Llama al servicio solo con idTerm
+    this.searchService.getEntries(option.idTerm).subscribe((r: any) => {
+        r.forEach((d: any) => {
+            // Agrega translationsString concatenando las entradas
+            d.translationsString = (d.data || []).map((entry: any) => entry.EntryVisualization).join(', ');
+        });
+
+        // Asigna el resultado a la propiedad entries
+        this.entries = r;
+
+        // Depuración
+        console.log(this.entries);
     });
-  }
+}
+
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../enviroments/enviroment';
 import { Entry } from '../core/models/entry.model';
@@ -30,12 +30,20 @@ export class DashboardService {
 
   constructor(private http: HttpClient) {}
 
-  get term$() {
+  get term$(): Observable<Entry | null> {
     return this._term$.asObservable();
   }
 
-  get newEntry$() {
+  setTerm(term: Entry | null): void {
+    this._term$.next(term);
+  }
+
+  get newEntry$(): Observable<string | null> {
     return this._newEntry$.asObservable();
+  }
+
+  setNewEntry(newEntry: string | null): void {
+    this._newEntry$.next(newEntry);
   }
 
   save() {

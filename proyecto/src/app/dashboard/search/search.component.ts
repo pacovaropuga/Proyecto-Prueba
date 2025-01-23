@@ -39,57 +39,55 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Manejo de los cambios en el campo de búsqueda con debounce
     this.autocompleteTermino.valueChanges
       .pipe(
         debounceTime(500),
-        filter(word => word.length > 0)
+        filter((word: string) => word.length > 0)
       )
       .subscribe(word => {
-        this.words$ = this.searchService.filter(word);
+        if (typeof word === 'string') {
+          this.words$ = this.searchService.filter(word);
+        }
       });
 
-    // Manejo de los cambios en el número de entrada
     this.entryNumber.valueChanges.subscribe(v => {
-      if (v === null || isNaN(v) || v > this.entries.length || v < 1)
-        {
+      if (v === null || isNaN(v) || v > this.entries.length || v < 1) {
         this.currentEntry = null;
         return;
       }
       this.currentEntry = this.entries[v - 1];
-      this.dashboardService.term$.next(this.currentEntry);
+      this.dashboardService.setTerm(this.currentEntry);
     });
   }
 
   changeEntryNumber(increment: number): void {
-    const newValue = this.entryNumber.value + increment;
-    if (newValue > this.entries.length || newValue < 1) return;
+    const newValue = (this.entryNumber.value || 0) + increment;
+    if (newValue < 1 || newValue > this.entries.length) return;
     this.entryNumber.setValue(newValue, { emitEvent: false });
     this.currentEntry = this.entries[newValue - 1];
     this.currentEntry.index = newValue;
-    this.dashboardService.term$.next(this.currentEntry);
-  }
-
-  displayFn(term: any): string {
-    return term?.term || '';
+    this.dashboardService.setTerm(this.currentEntry);
   }
 
   seleccionarTermino(option: any): void {
-    console.log(option);
     this.idTerm = option.idTerm;
     this.dashboardService.language = option.language;
-    this.dashboardService.selectedTerm$.next(option);
 
-    this.searchService.getEntries(option.idTerm, option.term).subscribe((entries: any) => {
+    this.searchService.getEntries(option.idTerm).subscribe((entries: any) => {
       this.entries = entries;
       this.currentEntry = entries[0];
       this.entryNumber.setValue(1, { emitEvent: false });
-      this.dashboardService.term$.next(this.currentEntry);
+      this.dashboardService.setTerm(this.currentEntry);
     });
   }
 
   newTerm(): void {
     console.log('Nuevo término seleccionado');
-    this.dashboardService.newTerm$.next(true); // Notificar un nuevo término
+    this.dashboardService.newTerm$.next(); // Notificar un nuevo término
+  }
+
+  // Método necesario para displayWith en el autocompletado
+  displayFn(term: any): string {
+    return term?.term || '';
   }
 }

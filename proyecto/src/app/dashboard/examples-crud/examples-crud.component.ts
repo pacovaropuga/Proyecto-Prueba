@@ -33,18 +33,19 @@ export class ExamplesCrudComponent implements OnInit {
   constructor() {}
 
   private loadExamples(idEntry: number): void {
-    this.dashboardService.getTranslations(idEntry).subscribe((t: any[]) => {
-      t.forEach(d => {
-        this.examples.push({
-          idExample: d.idExample,
-          example: d.translation,
-          idCreator: d.idCreator,
-          translation: d.translation,
-          idStatus: d.idStatus
+    this.dashboardService.getTranslations(idEntry).subscribe((t: any) => {
+        t.forEach((d: any) => {
+            this.examples.push({
+                idExample: d.idExample as number,
+                example: d.translation as string,
+                idCreator: d.idCreator as number,
+                translation: d.translation as string,
+                idStatus: d.idStatus as number
+            });
         });
-      });
     });
-  }
+}
+
 
   getStatus(idStatus: number): string {
     return this.statuses.find(e => e.id === idStatus)?.name || '';

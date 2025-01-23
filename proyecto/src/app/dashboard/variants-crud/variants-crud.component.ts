@@ -9,10 +9,10 @@ import { CommonModule } from '@angular/common';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-    selector: 'app-variants-crud',
-    imports: [CommonModule],
-    templateUrl: './variants-crud.component.html',
-    styleUrls: ['./variants-crud.component.css']
+  selector: 'app-variants-crud',
+  imports: [CommonModule],
+  templateUrl: './variants-crud.component.html',
+  styleUrls: ['./variants-crud.component.css'],
 })
 export class VariantsCrudComponent {
   variants: Variant[] = [];
@@ -46,29 +46,37 @@ export class VariantsCrudComponent {
       this.dashboardService.dashboardData.variants = {
         deletes: this.deletes,
         adds: this.adds,
-        variants: this.variants.filter(v => v.idEntry)
+        variants: this.variants.filter(v => v.idEntry),
       };
     });
 
-    this.dashboardService.newEntry$.subscribe((entry: string) => {
-      this.adds = [];
-      this.deletes = [];
-      this.variants = [
-        {
-          variant: entry,
-          grammar: '',
-          idVariant: undefined,
-          creator: undefined,
-          idStatus: 1
-        }
-      ];
-      this.adds.push(this.variants[0]);
+    this.dashboardService.newEntry$.subscribe((entry: string | null) => {
+      if (entry !== null) {
+        // Manejo del valor si no es null
+        this.adds = [];
+        this.deletes = [];
+        const newVariant = this.createVariant(entry);
+        this.variants = [newVariant];
+        this.adds.push(newVariant);
+      }
     });
+    
+  }
+
+  private createVariant(variant: string, grammar: string = '', idVariant: number = 0, creator: string = 'Admin'): Variant {
+    return {
+      variant,
+      grammar,
+      idVariant,
+      creator,
+      idStatus: 1,
+      idEntry: undefined,
+    };
   }
 
   add(variant: string, grammar: string): void {
-    if (!variant.length || this.variants.map(v => v.variant).includes(variant)) return;
-    const newVariant: Variant = { variant, grammar };
+    if (!variant.length || this.variants.some(v => v.variant === variant)) return;
+    const newVariant = this.createVariant(variant, grammar);
     this.variants.push(newVariant);
     this.adds.push(newVariant);
   }
@@ -94,7 +102,9 @@ export class VariantsCrudComponent {
       if (index !== -1) this.adds.splice(index, 1);
     }
     const variantIndex = this.variants.indexOf(variant);
-    this.variants.splice(variantIndex, 1);
+    if (variantIndex !== -1) {
+      this.variants.splice(variantIndex, 1);
+    }
   }
 
   deleteAll(): void {

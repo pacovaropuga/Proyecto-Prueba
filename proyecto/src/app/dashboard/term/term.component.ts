@@ -6,10 +6,10 @@ import { Term } from '../../core/models/term.model';
 import { filter } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-term',
-    imports: [CommonModule, FormsModule], // Importamos FormsModule
-    templateUrl: './term.component.html',
-    styleUrls: ['./term.component.css']
+  selector: 'app-term',
+  imports: [CommonModule, FormsModule], // Importamos FormsModule
+  templateUrl: './term.component.html',
+  styleUrls: ['./term.component.css']
 })
 export class TermComponent implements OnInit {
   term: Term;
@@ -37,7 +37,8 @@ export class TermComponent implements OnInit {
 
   newEntry(): void {
     if (this.term.language && this.term.term) {
-      this.dashboardService.newEntry$.next(this.term.term);
+      // Usar el método setNewEntry en lugar de acceder directamente a .next()
+      this.dashboardService.setNewEntry(this.term.term);
     }
   }
 }
