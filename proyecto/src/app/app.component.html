@@ -14,8 +14,16 @@
         </li>
       </ul>
       <ul class="navbar-nav navbar-right">
-        <li><a [routerLink]="['/login']" *ngIf="!conexion.sesionHaIniciado()" class="btn btn-outline-primary">Login</a></li>
-        <li><a class="btn btn-outline-primary" *ngIf="conexion.sesionHaIniciado()" (click)="logout()">Logout</a></li>
+        <li>
+          <a [routerLink]="['/login']" *ngIf="!authService.sesionHaIniciado()" class="btn btn-outline-primary">
+            Login
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-outline-primary" *ngIf="authService.sesionHaIniciado()" (click)="logout()">
+            Logout
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -26,4 +34,3 @@
 <div>
   <router-outlet></router-outlet>
 </div>
-

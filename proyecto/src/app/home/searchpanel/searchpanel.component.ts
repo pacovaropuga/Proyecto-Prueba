@@ -10,7 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { CommonModule } from '@angular/common'; // Se agrega CommonModule
+import { Observable } from 'rxjs';
 
 interface Word {
   idTerm: number;
@@ -19,17 +20,19 @@ interface Word {
 }
 
 @Component({
-    selector: 'app-searchpanel',
-    imports: [
-        ReactiveFormsModule,
-        MatAutocompleteModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatIconModule,
-    ],
-    templateUrl: './searchpanel.component.html',
-    styleUrls: ['./searchpanel.component.css']
+  selector: 'app-searchpanel',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    CommonModule, // Aseguramos que el CommonModule esté incluido para habilitar el pipe async
+  ],
+  templateUrl: './searchpanel.component.html',
+  styleUrls: ['./searchpanel.component.css'],
 })
 export class SearchpanelComponent implements OnInit {
   autocompleteTermino = new FormControl('');
@@ -42,7 +45,7 @@ export class SearchpanelComponent implements OnInit {
             <title>x</title>
             <path class="cls-1" d="M120.5891,106.37506,96.5609,80.39355l-3.842,3.8457-4.35187-4.35187c.33368-.43195.667-.864.98346-1.30475A46.77661,46.77661,0,1,0,77.87956,89.85687q.99472-.68619,1.955-1.42987l4.34509,4.345-4.31427,4.31409,26.5097,23.5246a10.0585,10.0585,0,1,0,14.21405-14.23566ZM74.21977,74.22931a32.4793,32.4793,0,1,1,9.48859-22.94189A32.48241,32.48241,0,0,1,74.21977,74.22931Z"/>
           </svg>`;
-word: any;
+  word: any;
 
   constructor(
     private searchService: SearchService,
@@ -50,7 +53,10 @@ word: any;
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute
   ) {
-    this.iconRegistry.addSvgIconLiteral('search', this.sanitizer.bypassSecurityTrustHtml(this.icon));
+    this.iconRegistry.addSvgIconLiteral(
+      'search',
+      this.sanitizer.bypassSecurityTrustHtml(this.icon)
+    );
   }
 
   ngOnInit(): void {

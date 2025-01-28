@@ -6,7 +6,7 @@ import { RoleGuard } from './shared/login/guards/role.guard';
 
 export const routes: Routes = [
     
-    {path: '', redirectTo: 'AppComponent.URL', pathMatch: 'full'},
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     {path: 'login', component: LoginComponent},
     {path: 'home/:word', component: HomeComponent},
     {path: 'home', component: HomeComponent},

@@ -8,8 +8,7 @@ import { environment } from '../../../../enviroments/enviroment';
     selector: 'app-examples', // Configuración standalone
     imports: [CommonModule], // Eliminamos HttpClientModule, ya que no es necesario
     templateUrl: './examples.component.html',
-    styleUrls: ['./examples.component.css'],
-    providers: [provideHttpClient()] // Configuración moderna de HttpClient
+    styleUrls: ['./examples.component.css']
 })
 export class ExamplesComponent implements OnInit {
   @Input() idEntry!: number; // Declaramos el Input como requerido
@@ -22,14 +21,15 @@ export class ExamplesComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.examples$ = this.http.get(environment.API + '/api/examples', {
+    if (!this.idEntry) {
+      console.error('idEntry no proporcionado.');
+      return;
+    }
+
+    this.examples$ = this.http.get(`${environment.API}/api/examples`, {
       params: {
         idEntry: this.idEntry.toString()
       }
     });
   }
 }
-function provideHttpClient(): import("@angular/core").Provider {
-  throw new Error('Function not implemented.');
-}
-
