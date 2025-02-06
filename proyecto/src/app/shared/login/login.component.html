@@ -1,49 +1,26 @@
 <section>
-    <div id="cover-caption">
-      <div class="container">
-        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-left form p-4">
-          <div class="px-2">
-            <form #loginForm="ngForm" (ngSubmit)="login()">
-              <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  [(ngModel)]="user.email"
-                  required
-                  email
-                  aria-describedby="emailHelp"
-                />
-                <div id="emailHelp" class="form-text">
-                  We'll never share your email with anyone else.
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  [(ngModel)]="user.password"
-                  required
-                />
-              </div>
-              <div class="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label class="form-check-label" for="exampleCheck1">Remember me</label>
-              </div>
-              <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-          </div>
+  <div id="cover-caption">
+    <div class="container">
+      <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-left form p-4">
+        <div class="px-2">
+          <form #loginForm="ngForm" (ngSubmit)="login()">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email address</mat-label>
+              <input matInput type="email" id="email" name="email" [(ngModel)]="user.email" required email>
+              <mat-hint>We'll never share your email with anyone else.</mat-hint>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" id="password" name="password" [(ngModel)]="user.password" required>
+            </mat-form-field>
+            
+            <mat-checkbox id="exampleCheck1">Remember me</mat-checkbox>
+            
+            <button mat-raised-button color="primary" type="submit">Login</button>
+          </form>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>

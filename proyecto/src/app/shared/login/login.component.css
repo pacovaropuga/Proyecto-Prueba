@@ -1,0 +1,45 @@
+/* Centrar el formulario en la pantalla */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    flex-direction: column;
+  }
+  
+  /* Ajustar tamaño y alineación de los campos de entrada */
+  mat-form-field {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+  }
+  
+  /* Estilizar los inputs para que no se vean apretados */
+  .mat-form-field-wrapper {
+    padding-bottom: 10px;
+  }
+  
+  /* Alinear elementos del formulario */
+  .form-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .mat-checkbox {
+    margin-bottom: 10px;
+  }
+  
+  /* Ajuste del botón para que esté debajo del campo password */
+  button {
+    height: 40px;
+    width: 120px;
+    font-size: 16px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-top: 15px;
+    align-self: flex-start;
+  }
+  

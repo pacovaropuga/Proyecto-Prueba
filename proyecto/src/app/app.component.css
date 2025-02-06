@@ -1,0 +1,77 @@
+.nav{
+    background: linear-gradient(90deg, #dddfb1, #dddfb1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 12px 20px;
+    border-bottom: 3px solid #ffcc00;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 1px;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.gap-4 {
+    gap: 20px;
+}
+
+.gap-3 {
+    gap: 15px;
+    margin-left: auto;
+}
+
+.mat-button {
+    color: black !important;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+    padding: 10px 15px;
+}
+
+.mat-button:hover {
+    color: #ffcc00 !important;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.mat-raised-button.mat-accent {
+    background-color: #ffcc00 !important;
+    color: #1e3c72 !important;
+    font-weight: bold;
+    padding: 8px 16px;
+}
+
+.mat-raised-button.mat-accent:hover {
+    background-color: #e6b800 !important;
+}
+
+.mat-raised-button.mat-warn {
+    background-color: #d9534f !important;
+    color: white !important;
+    padding: 8px 16px;
+}
+
+.mat-raised-button.mat-warn:hover {
+    background-color: #c82333 !important;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}

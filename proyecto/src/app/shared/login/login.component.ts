@@ -1,19 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { FormsModule } from '@angular/forms';
 
+// Importaciones de Angular Material
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-login',
-    imports: [FormsModule],
+    standalone: true, // Asegura que este componente sea standalone
+    imports: [
+      CommonModule,
+      FormsModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatButtonModule,
+      MatCheckboxModule
+    ],
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   user = {
-    email: 'asdf',
-    password: 'asdf'
+    email: '',
+    password: ''
   };
 
   constructor(

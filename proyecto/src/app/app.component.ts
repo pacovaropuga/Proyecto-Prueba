@@ -1,16 +1,33 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet, RouterModule } from '@angular/router';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { CommonModule } from '@angular/common'; // Importa CommonModule
-import { AuthService } from './shared/login/services/auth.service'; // Importa AuthService
+import { CommonModule } from '@angular/common'; 
+import { AuthService } from './shared/login/services/auth.service'; 
+
+// Angular Material Modules
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     CommonModule,
     RouterModule,
     RouterOutlet,
     NgxSpinnerModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -19,14 +36,13 @@ export class AppComponent {
   title = 'proyecto';
   static URL = 'app';
 
-  // Inyecta AuthService directamente en el constructor
   constructor(
-    public authService: AuthService, // Cambiado de `@Inject('AuthService')` a inyección directa
+    public authService: AuthService, 
     private router: Router
   ) {}
 
   logout() {
-    this.authService.cerrarSesion(); // Usa el método del servicio directamente
+    this.authService.cerrarSesion(); 
     this.router.navigate(['/home']);
   }
 }

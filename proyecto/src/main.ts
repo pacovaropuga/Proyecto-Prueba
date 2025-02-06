@@ -5,7 +5,8 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { AuthService } from './app/shared/login/services/auth.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { routes } from './app/app.routes'; // Asegúrate de importar las rutas
+import { routes } from './app/app.routes';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'; // Asegúrate de importar las rutas
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -14,6 +15,6 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes), // Registrar las rutas
     AuthService, // Registrar AuthService
     JwtHelperService, // Registrar JwtHelperService
-    { provide: JWT_OPTIONS, useValue: {} }, // Proveer opciones para JWT
+    { provide: JWT_OPTIONS, useValue: {} }, provideAnimationsAsync(), // Proveer opciones para JWT
   ],
 }).catch((err) => console.error(err));

@@ -1,36 +1,34 @@
 <section>
-    <mat-form-field appearance="outline" class="search-bar">
-      <mat-label>Search</mat-label>
-      <input
-        type="text"
-        matInput
-        [formControl]="autocompleteTermino"
-        [matAutocomplete]="auto"
-        placeholder="Search..."
-        aria-label="Search"
-      />
-      <button mat-icon-button (click)="autocompleteTermino.value && seleccionarTermino({ term: autocompleteTermino.value, idTerm: 0, language: 'en' })">
-        <mat-icon>search</mat-icon>
-      </button>
-      
-    </mat-form-field>
-  
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      [displayWith]="displayFn"
-      (optionSelected)="seleccionarTermino($event.option.value)"
+  <mat-form-field appearance="outline" class="search-bar">
+    <mat-label>Search</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="autocompleteTermino"
+      [matAutocomplete]="auto"
+      placeholder="Search..."
+      aria-label="Search"
+    />
+    <button mat-icon-button matSuffix (click)="autocompleteTermino.value && seleccionarTermino({ term: autocompleteTermino.value, idTerm: 0, language: 'en' })">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+    (optionSelected)="seleccionarTermino($event.option.value)"
+  >
+    <mat-option
+      *ngFor="let word of words$ | async"
+      [value]="word"
     >
-      <mat-option
-        *ngFor="let word of words$ | async"
-        [value]="word"
-      >
-        <img
-          width="20px"
-          [src]="word.language === 'en' ? 'https://lexis.ugr.es/artwork/britishflag.png' : 'https://lexis.ugr.es/artwork/es.png'"
-          alt=""
-        />
-        {{ word.term }}
-      </mat-option>
-    </mat-autocomplete>
-  </section>
-  
+      <img
+        width="20px"
+        [src]="word.language === 'en' ? 'https://lexis.ugr.es/artwork/britishflag.png' : 'https://lexis.ugr.es/artwork/es.png'"
+        alt=""
+      />
+      {{ word.term }}
+    </mat-option>
+  </mat-autocomplete>
+</section>
