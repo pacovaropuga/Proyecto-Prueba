@@ -23,7 +23,7 @@ export class AuthService {
 
   // Método para iniciar sesión
   login(user: any): Observable<any> {
-    return this.http.post(`${this.URL}/user/singin`, user);
+    return this.http.post(`${this.URL}/api/signin`, user);
   }
 
   // Verifica si el usuario está autenticado
